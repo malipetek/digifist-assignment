@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "twocolfullpage": {
+      "type": "digifist-section",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/bg.png",
+        "title": "Everyday items, we have something to suit every occasion.",
+        "description": "",
+        "products": [
+
+        ],
+        "collection": ""
+      }
+    },
+    "5f3196c7-7b68-4fd7-afe7-ac8f3a03799c": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "Featured collection",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "clothes",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "background-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "twocolfullpage",
+    "5f3196c7-7b68-4fd7-afe7-ac8f3a03799c"
+  ]
+}

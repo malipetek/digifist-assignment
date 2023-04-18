@@ -1,0 +1,443 @@
+{% comment %}
+  preload fonts
+  ITCAvantGardeProBold.otf
+  Avenir.ttc
+{% endcomment %}
+<link
+  rel="preload"
+  href="{{ 'ITCAvantGardeProBold.otf' | asset_url }}"
+  as="font"
+  type="font/otf"
+  crossorigin="anonymous"
+>
+<link rel="preload" href="{{ 'Avenir.ttc' | asset_url }}" as="font" type="font/ttf" crossorigin="anonymous">
+
+<style>
+  @font-face {
+    font-family: 'ITC Avant Garde Gothic Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('{{ 'ITCAvantGardeProBold.otf' | asset_url }}') format('opentype');
+  }
+  @font-face {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('{{ 'Avenir.ttc' | asset_url }}') format('truetype');
+  }
+</style>
+{% stylesheet %}
+  .digifist-section-main {
+    --height: calc(100vh - var(--header-height, 65px) - 37.9px);
+    width: 100%;
+    min-height: var(--height);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100% 100%;
+  }
+
+  .content-container {
+    padding: 13.3% 0 13.2%;
+  }
+  .content {
+    padding-left: 16%;
+    padding-right: 14.7%;
+    margin-bottom: 74px;
+  }
+
+  .content a {
+    font-family: 'Avenir';
+    color: #000000;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12.8px;
+    line-height: 17px;
+    display: inline-flex;
+    align-items: center;
+    text-transform: capitalize;
+    margin-top: 32px;
+  }
+
+  .title {
+    /* add fallback fonts */
+    font-family: 'ITC Avant Garde Gothic Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 31.25px;
+    line-height: 130%;
+    margin-bottom: 0!important;
+  }
+
+  .description {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #666666;
+    margin-top: 12px;
+  }
+  .slider {
+    padding-left: 16%;
+  }
+  slider-component.slider-component-full-width{
+    --desktop-margin-left-first-item: 16% !important;
+    --grid-desktop-horizontal-spacing: 32px !important;
+  }
+  .slider-component-full-width .slider--desktop .slider__slide:first-child {
+    margin-left: 16%!important;
+    scroll-margin-left: 300px!important;
+  }
+  @media screen and (min-width: 990px) {
+    .slider--desktop.grid--2-col-desktop .grid__item {
+      width: calc((100%) / 2 - var(--grid-desktop-horizontal-spacing) * 5)!important;
+    }
+  }
+  .image-container {
+    width: 100%;
+    height: var(--height);
+  }
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ banner_image_object_position }};
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .slider-buttons {
+    justify-content: space-between !important;
+    align-items: center;
+    position: absolute;
+    top: calc(50% - 41px - 0.5em);
+    left: 48px;
+    right: 48px;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: calc(100% - 96px);
+  }
+  .slider-button {
+    padding: 0;
+  }
+  .slider-button--prev {
+    opacity: calc(var(--scroll-left-percent)/20);
+  }
+  .slider-button--next {
+    opacity: calc(var(--scroll-right-percent)/20);
+  }
+
+  .card__information {
+    padding-top: 12px;
+  }
+  .card__information .card__heading > a {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.8px;
+    line-height: 160%;
+  }
+  .card__information .card-information {
+    padding-top: 4px;
+  }
+  .card__information .price {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12.8px;
+    line-height: 160%;
+    margin-top: 0 !important;
+  }
+
+  .color-picker {
+    float: right;
+  }
+
+  .color-picker__item {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 4px;
+    cursor: pointer;
+  }
+  label.color-picker__item:first-of-type{
+    margin-left: 0;
+  }
+
+  :checked+.color-picker__item {
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px black;
+  }
+
+  /* disable card wide clickability */
+  .card__heading a::after {
+    display: none;
+  }
+
+  @media (max-width: 750px) {
+
+    .digifist-section-main {
+      --height: calc(100vh - var(--header-height, 64.62px) - 36.22px - 8.5%);
+      --height-p: calc(var(--height) / 100);
+      grid-template-columns: 1fr;
+      grid-template-rows: calc(58 * var(--height-p)) calc(62 * var(--height-p));
+    }
+
+    .image-container {
+      position: relative;
+      height: 100%;
+    }
+    .image-container:after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 78.65%);
+      opacity: 0.5;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /*
+      58vh
+      72vh
+    */
+    .content {
+      margin-bottom: 0;
+      padding-left: 6.66%;
+      padding-right: 6.66%;
+    }
+    .content-container {
+      padding-top: 0;
+      margin-top: calc((26 + 8.5) * var(--height-p) * -1);
+      justify-content: flex-start;
+      gap: 32px;
+    }
+    .description {
+      display: none;
+    }
+    .title {
+      font-family: 'ITC Avant Garde Gothic Pro';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 130%;
+      color: #FFFFFF;
+    }
+    .content a {
+      font-family: 'Avenir';
+      font-style: normal;
+      font-weight: 900;
+      font-size: 12.8px;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      color: #FFFFFF;
+      margin-top: 16px
+    }
+
+    .slider {
+      padding-left: 6.66%;
+    }
+    .slider-button {
+      display: none!important;
+    }
+    .slider-component-full-width .slider--desktop .slider__slide:first-child {
+      margin-left: 6.66%!important;
+    }
+    slider-component.slider-component-full-width{
+      --desktop-margin-left-first-item: 6.66% !important;
+      --grid-mobile-horizontal-spacing: 12px !important;
+    }
+    .color-picker {
+      width: 100%;
+      float: left;
+      margin-top: 8px;
+    }
+  }
+{% endstylesheet %}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  if section.settings.collection != blank
+    assign slider_products = section.settings.collection.products | limit: 8
+  elsif section.settings.products.size > 0
+    assign slider_products = section.settings.products
+  else
+    assign slider_products = collection.products | limit: 8
+  endif
+%}
+<div class="image-container">
+  {%- capture sizes -%}
+      (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width }}px - 100px) * 1 / 3 - {{ grid_space_desktop }}),
+      (min-width: 750px) calc((100vw - 100px) * 1 / 3 - {{ grid_space_desktop }}),
+      {% if section.settings.mobile_layout == 'collage' %}calc((100vw - 30px) / 2 - {{ grid_space_mobile }}){% else %}calc(100vw - 30px){% endif %}
+  {%- endcapture -%}
+  {%- if section.settings.image != blank -%}
+    {{
+      section.settings.image
+      | image_url: width: 3200
+      | image_tag:
+        class: 'banner-image',
+        loading: 'eager',
+        sizes: sizes,
+        widths: '300, 400, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3200'
+    }}
+  {%- else -%}
+    {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</div>
+<div class="content-container">
+  {% comment %}
+    <slideshow-component
+      class="slider-mobile-gutter{% if section.settings.layout == 'grid' %} page-width{% endif %}{% if section.settings.show_text_below %} mobile-text-below{% endif %}"
+      role="region"
+      aria-roledescription="{{ 'sections.slideshow.carousel' | t }}"
+      aria-label="{{ section.settings.accessibility_info | escape }}"
+    >
+  {% endcomment %}
+  <div class="content">
+    <h4 class="title mb-0">
+      {{ section.settings.title | default: collection.title }}
+    </h4>
+    <p class="description">
+      {{ section.settings.description | default: collection.description }}
+    </p>
+    {% if section.settings.colection or collection %}
+      {% assign col = section.settings.collection | default: collection %}
+      <a href="{{ col.url }}"> Shop All {{ col.title | default: '' }} </a>
+    {% endif %}
+  </div>
+  <slider-component class="slider-mobile-gutter slider-component-full-width slider-component-desktop">
+    <ul
+      id="Slider-{{ section.id }}"
+      class="grid product-grid contains-card contains-card--product grid--2-col-desktop grid--2-col-tablet-down slider slider--desktop slider--tablet grid--peek"
+      role="list"
+      aria-label="{{ 'general.slider.name' | t }}"
+    >
+      {%- for product in slider_products -%}
+        <li
+          id="Slide-{{ section.id }}-{{ forloop.index }}"
+          class="grid__item slider__slide scroll-trigger animate--slide-in"
+          data-cascade
+        >
+          {% render 'card-product',
+            card_product: product,
+            media_aspect_ratio: 'portrait',
+            show_secondary_image: false,
+            show_vendor: false,
+            show_rating: false,
+            show_quick_add: false,
+            section_id: section.id
+          %}
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="slider-buttons">
+      <button
+        type="button"
+        class="slider-button slider-button--prev"
+        name="previous"
+        aria-label="{{ 'general.slider.previous_slide' | t }}"
+        aria-controls="Slider-{{ section.id }}"
+        style="transform: rotate(180deg);"
+      >
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6464 13.6464C16.8417 13.4512 17.1583 13.4512 17.3536 13.6464L23.3536 19.6464C23.5488 19.8417 23.5488 20.1583 23.3536 20.3536L17.3536 26.3536C17.1583 26.5488 16.8417 26.5488 16.6464 26.3536C16.4512 26.1583 16.4512 25.8417 16.6464 25.6464L22.2929 20L16.6464 14.3536C16.4512 14.1583 16.4512 13.8417 16.6464 13.6464Z" fill="black"/>
+          <rect x="0.5" y="0.5" width="39" height="39" stroke="black" stroke-opacity="0.1"/>
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="slider-button slider-button--next"
+        name="next"
+        aria-label="{{ 'general.slider.next_slide' | t }}"
+        aria-controls="Slider-{{ section.id }}"
+      >
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6464 13.6464C16.8417 13.4512 17.1583 13.4512 17.3536 13.6464L23.3536 19.6464C23.5488 19.8417 23.5488 20.1583 23.3536 20.3536L17.3536 26.3536C17.1583 26.5488 16.8417 26.5488 16.6464 26.3536C16.4512 26.1583 16.4512 25.8417 16.6464 25.6464L22.2929 20L16.6464 14.3536C16.4512 14.1583 16.4512 13.8417 16.6464 13.6464Z" fill="black"/>
+          <rect x="0.5" y="0.5" width="39" height="39" stroke="black" stroke-opacity="0.1"/>
+        </svg>
+      </button>
+    </div>
+  </slider-component>
+</div>
+
+{% liquid
+  assign banner_image_object_position = 'center'
+  if section.settings.image != blank
+    assign banner_image_object_position = section.settings.image.presentation.focal_point.x | append: '% ' | append: section.settings.image.presentation.focal_point.y | append: '%'
+  endif
+%}
+
+{% schema %}
+{
+  "name": "Landing Page 2 Columns",
+  "tag": "section",
+  "class": "digifist-section-main",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Select an image to show in the banner"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Title to show in the banner falls back to collection title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "info": "Description to show in the banner falls back to collection description"
+    },
+    {
+      "type": "header",
+      "content": "Select Products for Carousel"
+    },
+    {
+      "type": "paragraph",
+      "content": "If you omit selecting products or the collection, carousel will use default collection if available."
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products",
+      "limit": 10,
+      "info": "Select products to show in the carousel"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection",
+      "info": "Select a collection to show in the carousel"
+    }
+  ]
+}
+{% endschema %}
