@@ -619,6 +619,19 @@ class SliderComponent extends HTMLElement {
     this.slider.addEventListener('scroll', this.update.bind(this));
     this.prevButton.addEventListener('click', this.onButtonClick.bind(this));
     this.nextButton.addEventListener('click', this.onButtonClick.bind(this));
+    // add onscroll event to the slider
+    this.slider.addEventListener('scroll', this.onScroll.bind(this));
+    this.onScroll();
+  }
+
+  onScroll() {
+    // get the current scroll position
+    const scrollPosition = this.slider.scrollLeft;
+    // output css variable for --scroll-left-percent and --scroll-right-percent
+    // scroll left percent should be 0 when there is no more scroll left and 100 when there is no more scroll right
+    // scroll right percent should be 0 when there is no more scroll right and 100 when there is no more scroll left
+    this.style.setProperty('--scroll-left-percent', Math.round((scrollPosition / (this.slider.scrollWidth - this.slider.clientWidth)) * 100));
+    this.style.setProperty('--scroll-right-percent', Math.round(100 - (scrollPosition / (this.slider.scrollWidth - this.slider.clientWidth)) * 100));
   }
 
   initPages() {
@@ -718,6 +731,7 @@ class SlideshowComponent extends SliderComponent {
     });
 
     if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay();
+
   }
 
   setAutoPlay() {
@@ -858,7 +872,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -995,8 +1009,7 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
