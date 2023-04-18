@@ -30,14 +30,16 @@
   endif
 -%}
 
-<div class="
+<div
+  class="
     price
     {%- if price_class %} {{ price_class }}{% endif -%}
     {%- if available == false %} price--sold-out {% endif -%}
     {%- if compare_at_price > price %} price--on-sale {% endif -%}
     {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
     {%- if show_badges %} price--show-badge{% endif -%}
-  ">
+  "
+>
   <div class="price__container">
     {%- comment -%}
       Explanation of description list:
@@ -83,6 +85,32 @@
       </span>
     </small>
   </div>
+  {% liquid
+    assign randomNumber = 'now' | date: '%N' | modulo: 1000
+    assign colors = '#99C3CC,#CC9999,#CB99CC,#A6CC99' | split: ','
+    assign show_colors = true
+  %}
+  {% if show_colors %}
+    <span class="color-picker">
+      {% for color in colors %}
+        <input
+          {% if forloop.first %}
+            checked
+          {% endif %}
+          type="radio"
+          name="R{{randomNumber}}_color"
+          id="R{{randomNumber}}__{{ color }}"
+          value="{{ color }}"
+          class="hidden"
+        >
+        <label
+          for="R{{randomNumber}}__{{ color }}"
+          class="color-picker__item"
+          style="background-color: {{ color }}"
+        ></label>
+      {% endfor %}
+    </span>
+  {% endif %}
   {%- if show_badges -%}
     <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
       {{ 'products.product.on_sale' | t }}

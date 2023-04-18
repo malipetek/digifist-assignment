@@ -1,3 +1,277 @@
+{% comment %}
+  preload fonts
+  ITCAvantGardeProBold.otf
+  Avenir.ttc
+{% endcomment %}
+<link
+  rel="preload"
+  href="{{ 'ITCAvantGardeProBold.otf' | asset_url }}"
+  as="font"
+  type="font/otf"
+  crossorigin="anonymous"
+>
+<link rel="preload" href="{{ 'Avenir.ttc' | asset_url }}" as="font" type="font/ttf" crossorigin="anonymous">
+
+<style>
+  @font-face {
+    font-family: 'ITC Avant Garde Gothic Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('{{ 'ITCAvantGardeProBold.otf' | asset_url }}') format('opentype');
+  }
+  @font-face {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('{{ 'Avenir.ttc' | asset_url }}') format('truetype');
+  }
+</style>
+{% stylesheet %}
+  .digifist-section-main {
+    --height: calc(100vh - var(--header-height, 65px) - 37.9px);
+    width: 100%;
+    min-height: var(--height);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100% 100%;
+  }
+
+  .content-container {
+    padding: 13.3% 0 13.2%;
+  }
+  .content {
+    padding-left: 16%;
+    padding-right: 14.7%;
+    margin-bottom: 74px;
+  }
+
+  .content a {
+    font-family: 'Avenir';
+    color: #000000;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12.8px;
+    line-height: 17px;
+    display: inline-flex;
+    align-items: center;
+    text-transform: capitalize;
+    margin-top: 32px;
+  }
+
+  .title {
+    /* add fallback fonts */
+    font-family: 'ITC Avant Garde Gothic Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 31.25px;
+    line-height: 130%;
+    margin-bottom: 0!important;
+  }
+
+  .description {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #666666;
+    margin-top: 12px;
+  }
+  .slider {
+    padding-left: 16%;
+  }
+  slider-component.slider-component-full-width{
+    --desktop-margin-left-first-item: 16% !important;
+    --grid-desktop-horizontal-spacing: 32px !important;
+  }
+  .slider-component-full-width .slider--desktop .slider__slide:first-child {
+    margin-left: 16%!important;
+    scroll-margin-left: 300px!important;
+  }
+  @media screen and (min-width: 990px) {
+    .slider--desktop.grid--2-col-desktop .grid__item {
+      width: calc((100%) / 2 - var(--grid-desktop-horizontal-spacing) * 5)!important;
+    }
+  }
+  .image-container {
+    width: 100%;
+    height: var(--height);
+  }
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ banner_image_object_position }};
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .slider-buttons {
+    justify-content: space-between !important;
+    align-items: center;
+    position: absolute;
+    top: calc(50% - 41px - 0.5em);
+    left: 48px;
+    right: 48px;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: calc(100% - 96px);
+  }
+  .slider-button {
+    padding: 0;
+  }
+  .slider-button--prev {
+    opacity: calc(var(--scroll-left-percent)/20);
+  }
+  .slider-button--next {
+    opacity: calc(var(--scroll-right-percent)/20);
+  }
+
+  .card__information {
+    padding-top: 12px;
+  }
+  .card__information .card__heading > a {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.8px;
+    line-height: 160%;
+  }
+  .card__information .card-information {
+    padding-top: 4px;
+  }
+  .card__information .price {
+    font-family: 'Avenir';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12.8px;
+    line-height: 160%;
+    margin-top: 0 !important;
+  }
+
+  .color-picker {
+    float: right;
+  }
+
+  .color-picker__item {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 4px;
+    cursor: pointer;
+  }
+  label.color-picker__item:first-of-type{
+    margin-left: 0;
+  }
+
+  :checked+.color-picker__item {
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px black;
+  }
+
+  /* disable card wide clickability */
+  .card__heading a::after {
+    display: none;
+  }
+
+  @media (max-width: 750px) {
+
+    .digifist-section-main {
+      --height: calc(100vh - var(--header-height, 64.62px) - 36.22px - 8.5%);
+      --height-p: calc(var(--height) / 100);
+      grid-template-columns: 1fr;
+      grid-template-rows: calc(58 * var(--height-p)) calc(62 * var(--height-p));
+    }
+
+    .image-container {
+      position: relative;
+      height: 100%;
+    }
+    .image-container:after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 78.65%);
+      opacity: 0.5;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /*
+      58vh
+      72vh
+    */
+    .content {
+      margin-bottom: 0;
+      padding-left: 6.66%;
+      padding-right: 6.66%;
+    }
+    .content-container {
+      padding-top: 0;
+      margin-top: calc((26 + 8.5) * var(--height-p) * -1);
+      justify-content: flex-start;
+      gap: 32px;
+    }
+    .description {
+      display: none;
+    }
+    .title {
+      font-family: 'ITC Avant Garde Gothic Pro';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 130%;
+      color: #FFFFFF;
+    }
+    .content a {
+      font-family: 'Avenir';
+      font-style: normal;
+      font-weight: 900;
+      font-size: 12.8px;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      color: #FFFFFF;
+      margin-top: 16px
+    }
+
+    .slider {
+      padding-left: 6.66%;
+    }
+    .slider-button {
+      display: none!important;
+    }
+    .slider-component-full-width .slider--desktop .slider__slide:first-child {
+      margin-left: 6.66%!important;
+    }
+    slider-component.slider-component-full-width{
+      --desktop-margin-left-first-item: 6.66% !important;
+      --grid-mobile-horizontal-spacing: 12px !important;
+    }
+    .color-picker {
+      width: 100%;
+      float: left;
+      margin-top: 8px;
+    }
+  }
+{% endstylesheet %}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
 {% liquid
   if section.settings.collection != blank
     assign slider_products = section.settings.collection.products | limit: 8
@@ -36,12 +310,19 @@
       aria-label="{{ section.settings.accessibility_info | escape }}"
     >
   {% endcomment %}
-  <div class="text-content">
-    <h1>collection title</h1>
-    <p>collection description</p>
-    <a href="collection url"> view collection </a>
+  <div class="content">
+    <h4 class="title mb-0">
+      {{ section.settings.title | default: collection.title }}
+    </h4>
+    <p class="description">
+      {{ section.settings.description | default: collection.description }}
+    </p>
+    {% if section.settings.colection or collection %}
+      {% assign col = section.settings.collection | default: collection %}
+      <a href="{{ col.url }}"> Shop All {{ col.title | default: '' }} </a>
+    {% endif %}
   </div>
-  <slider-component class="slider-mobile-gutter slider-component-full-width slider-component-desktop{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <slider-component class="slider-mobile-gutter slider-component-full-width slider-component-desktop">
     <ul
       id="Slider-{{ section.id }}"
       class="grid product-grid contains-card contains-card--product grid--2-col-desktop grid--2-col-tablet-down slider slider--desktop slider--tablet grid--peek"
@@ -56,7 +337,7 @@
         >
           {% render 'card-product',
             card_product: product,
-            media_aspect_ratio: 1,
+            media_aspect_ratio: 'portrait',
             show_secondary_image: false,
             show_vendor: false,
             show_rating: false,
@@ -103,38 +384,10 @@
     assign banner_image_object_position = section.settings.image.presentation.focal_point.x | append: '% ' | append: section.settings.image.presentation.focal_point.y | append: '%'
   endif
 %}
-{% stylesheet %}
-  .digifist-section-main {
-    width: 100%;
-    height: calc(100vh - 100px);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100% 100%;
-  }
-
-  .image-container {
-    width: 100%;
-    height: 100%;
-  }
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: {{ banner_image_object_position }};
-
-  }
-
-  @media (max-width: 750px) {
-    .digifist-section-main {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 45vh;
-    }
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Full Page 2 Columns",
+  "name": "Landing Page 2 Columns",
   "tag": "section",
   "class": "digifist-section-main",
   "settings": [
@@ -147,6 +400,22 @@
       "id": "image",
       "label": "Image",
       "info": "Select an image to show in the banner"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Title to show in the banner falls back to collection title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "info": "Description to show in the banner falls back to collection description"
     },
     {
       "type": "header",
