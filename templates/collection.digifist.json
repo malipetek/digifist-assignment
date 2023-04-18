@@ -4,6 +4,8 @@
       "type": "digifist-section",
       "settings": {
         "image": "shopify:\/\/shop_images\/bg.png",
+        "title": "Everyday items, we have something to suit every occasion.",
+        "description": "",
         "products": [
 
         ],
@@ -12,6 +14,7 @@
     },
     "5f3196c7-7b68-4fd7-afe7-ac8f3a03799c": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured collection",
         "heading_size": "h1",
